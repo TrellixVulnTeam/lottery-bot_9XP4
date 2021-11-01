@@ -1,11 +1,13 @@
 # Participate in lottery
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+import json
+
 from time import sleep
 from datetime import datetime
 import csv
-
-from selenium.webdriver.chrome.options import Options
 
 class trackerBot(): 
 
@@ -111,16 +113,21 @@ class trackerBot():
 # functions execution order
 def bot(uri):
 
-    # contact info
-    contact_info = {
-        'first_name'    : 'Lauri',
-        'last_name'     : 'Böhm',
-        'email'         : 'lauri.bohm@gmail.com',
-        'address'       : 'Haukilahdenkatu 1 A 79',
-        'postal_code'   : '02200',
-        'city'          : 'Espoo',
-        'phone_number'  : '0405737842'
-    }
+    # get contact info from config file
+    with open("config.json") as json_data_file:
+        data = json.load(json_data_file)
+        # print(data)
+
+        # contact info
+        contact_info = {
+            'first_name'    : data['contact']['first_name'],
+            'last_name'     : data['contact']['last_name'],
+            'email'         : data['contact']['email'],
+            'address'       : data['contact']['address'],
+            'postal_code'   : data['contact']['postal_code'],
+            'city'          : data['contact']['city'],
+            'phone_number'  : data['contact']['phone_number']
+        }
 
     # creates new 'bot' by touching bot class
     bot = trackerBot()
