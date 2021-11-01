@@ -19,19 +19,18 @@ class trackerBot():
         # enable if you want to run app in a background
         # chrome_options.add_argument("--headless")
 
-        ## prevents website from chekcing if you are a bot
-
-        # assign fake user agent
+        ## 
+        # prevents website from chekcing if you are a bot
+        
         chrome_options.add_argument(f'user-agent={"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36"}')
         
-        # disables website from checking if you are using automation in controls
         chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 
-        # if website is disabled automation in js
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 
-        # prevents js from adding any automation flags itself
         chrome_options.add_experimental_option('useAutomationExtension', False)
+
+        ##
 
         WINDOW_SIZE = "1920,1080"
         chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
