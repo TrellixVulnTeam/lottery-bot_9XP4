@@ -103,8 +103,10 @@ class trackerBot():
 
             # if participation failed the value would be 'submit-error'
             if(str(success_check) == 'submit-success'):
+                self.driver.quit()
                 return(1)
             else:
+                self.driver.quit()
                 return(0)
 
 # functions execution order
