@@ -21,7 +21,7 @@ class trackerBot():
 
         ## 
         # prevents website from chekcing if you are a bot
-        
+
         chrome_options.add_argument(f'user-agent={"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36"}')
         
         chrome_options.add_argument('--disable-blink-features=AutomationControlled')
@@ -95,8 +95,6 @@ class trackerBot():
         
         submit_btn = self.driver.find_element_by_xpath('//*[@id="competition-form-submit"]')
         submit_btn.click()
-
-        sleep(3)
 
     def check_result(self):
             
