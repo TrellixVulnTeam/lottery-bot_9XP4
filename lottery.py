@@ -223,7 +223,7 @@ def main():
     report_time = datetime.now()
     dt_report_time = str(report_time.strftime("%d-%m-%Y_%H:%M:%S"))
 
-    with open(dt_report_time + '.csv', 'w', encoding='UTF8', newline='') as f:
+    with open('execution-results/' + dt_report_time + '.csv', 'w', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
 
         writer.writerow('')
