@@ -5,7 +5,6 @@ from selenium.webdriver.chrome.options import Options
 
 import json
 
-from time import sleep
 from datetime import datetime
 import csv
 
@@ -17,7 +16,7 @@ class trackerBot():
         chrome_options = Options()
 
         # enable if you want to run app in a background
-        # chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--headless")
 
         ## 
         # prevents website from chekcing if you are a bot
