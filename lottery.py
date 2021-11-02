@@ -76,7 +76,7 @@ class trackerBot():
         # between different lotteries only this task part differs
         # -> some are commented out
         # only add new task once new lottery is out
-        # also remember to change the url
+        # also remember to change the url in the main() function
 
         ## air pods
         # task_btn = self.driver.find_element_by_xpath('//*[@id="competition-form-container"]/form/div[1]/ul/li[3]/div[1]/div')
@@ -176,10 +176,12 @@ def bot(uri):
 # program starts here
 def start_lottery(times_to_participate):
     
-    # uri for lottery
-    # air pods
+    # uri for lotteries
+
+    ## air pods
     # uri = 'https://www.k-ruoka.fi/kilpailut/apetit-evaskippo-arvonta'
-    # suklaata jouluksi 
+
+    ## panda suklaa 
     uri = 'https://www.k-ruoka.fi/kilpailut/panda-vaajakoski-primus-arvonta'
 
     execution_report = []
