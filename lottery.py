@@ -73,11 +73,16 @@ class trackerBot():
     # execute task to participate in lottery
     def do_some_task(self):
 
-        # air pods
+        # between different lotteries only this task part differs
+        # -> some are commented out
+        # only add new task once new lottery is out
+        # also remember to change the url
+
+        ## air pods
         # task_btn = self.driver.find_element_by_xpath('//*[@id="competition-form-container"]/form/div[1]/ul/li[3]/div[1]/div')
         # task_btn.click()
 
-        # suklaata jouluksi
+        ## panda suklaa
         task_field = self.driver.find_element_by_xpath('//*[@id="free-text"]')
         task_field.send_keys('Koko suvulle jakoon, koska ovat tulossa viettämään joulua tänä vuonna meille!')
 
