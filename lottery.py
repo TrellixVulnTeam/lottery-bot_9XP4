@@ -79,12 +79,12 @@ class trackerBot():
         # also remember to change the url in the main() function
 
         ## air pods
-        # task_btn = self.driver.find_element_by_xpath('//*[@id="competition-form-container"]/form/div[1]/ul/li[3]/div[1]/div')
-        # task_btn.click()
+        task_btn = self.driver.find_element_by_xpath('//*[@id="competition-form-container"]/form/div[1]/ul/li[3]/div[1]/div')
+        task_btn.click()
 
         ## panda suklaa
-        task_field = self.driver.find_element_by_xpath('//*[@id="free-text"]')
-        task_field.send_keys('Koko suvulle jakoon, koska ovat tulossa viettämään joulua tänä vuonna meille!')
+        # task_field = self.driver.find_element_by_xpath('//*[@id="free-text"]')
+        # task_field.send_keys('Koko suvulle jakoon, koska ovat tulossa viettämään joulua tänä vuonna meille!')
 
 
     # enter contact info
@@ -179,10 +179,10 @@ def start_lottery(times_to_participate):
     # uri for lotteries
 
     ## air pods
-    # uri = 'https://www.k-ruoka.fi/kilpailut/apetit-evaskippo-arvonta'
+    uri = 'https://www.k-ruoka.fi/kilpailut/apetit-evaskippo-arvonta'
 
     ## panda suklaa 
-    uri = 'https://www.k-ruoka.fi/kilpailut/panda-vaajakoski-primus-arvonta'
+    # uri = 'https://www.k-ruoka.fi/kilpailut/panda-vaajakoski-primus-arvonta'
 
     execution_report = []
     success_count = 0
