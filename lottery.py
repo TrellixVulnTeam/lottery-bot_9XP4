@@ -1,10 +1,22 @@
 # Participate in lottery
 
+# for UI
+
+from kivy.config import Config
+Config.set('graphics', 'resizable', False)
+
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.label import Label
+from kivy.uix.image import Image
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+from kivy.uix.popup import Popup
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
+from time import sleep
 import json
-
 from datetime import datetime
 import csv
 
@@ -36,10 +48,11 @@ class trackerBot():
         
         self.driver = webdriver.Chrome(options=chrome_options)
 
-        # disables website from checking if you are usin automation in navigation
+        # disables website from checking you are useing webdriver as navigator
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
-        self.driver.implicitly_wait(10) # seconds
+        # waits max 10 seconds if some element is not clickable / selectable / etc... currently during execution
+        self.driver.implicitly_wait(10)
 
 
     #  loads web page
@@ -57,12 +70,12 @@ class trackerBot():
     def do_some_task(self):
 
         # air pods
-        task_btn = self.driver.find_element_by_xpath('//*[@id="competition-form-container"]/form/div[1]/ul/li[3]/div[1]/div')
-        task_btn.click()
+        # task_btn = self.driver.find_element_by_xpath('//*[@id="competition-form-container"]/form/div[1]/ul/li[3]/div[1]/div')
+        # task_btn.click()
 
         # suklaata jouluksi
-        # task_field = self.driver.find_element_by_xpath('//*[@id="free-text"]')
-        # task_field.send_keys('Koko suvulle jakoon, koska ovat tulossa viettämään joulua tänä vuonna meille!')
+        task_field = self.driver.find_element_by_xpath('//*[@id="free-text"]')
+        task_field.send_keys('Koko suvulle jakoon, koska ovat tulossa viettämään joulua tänä vuonna meille!')
 
 
     # enter contact info
@@ -95,6 +108,8 @@ class trackerBot():
         submit_btn = self.driver.find_element_by_xpath('//*[@id="competition-form-submit"]')
         submit_btn.click()
 
+    # if bot doesn't bypass website 'bot test' :Dddd the result after submit is error message
+    # function checks and saves the submit result
     def check_result(self):
             
             success_check = self.driver.find_element_by_xpath('//*[@id="competition-form-container"]/div/div')
@@ -114,7 +129,6 @@ def bot(uri):
     # get contact info from config file
     with open("config.json") as json_data_file:
         data = json.load(json_data_file)
-        # print(data)
 
         # contact info
         contact_info = {
@@ -150,24 +164,14 @@ def bot(uri):
     except:
         return(0)
 
-
-def main():
+# program starts here
+def start_lottery(times_to_participate):
     
     # uri for lottery
     # air pods
-    uri = 'https://www.k-ruoka.fi/kilpailut/apetit-evaskippo-arvonta'
+    # uri = 'https://www.k-ruoka.fi/kilpailut/apetit-evaskippo-arvonta'
     # suklaata jouluksi 
-    # uri = 'https://www.k-ruoka.fi/kilpailut/panda-vaajakoski-primus-arvonta'
-
-    # ask user for # times to participate
-    proper_value = 1
-    while proper_value != 0:
-        try:
-            times_to_participate = int(input('\nHow many times would you like to participate in lottery?\nGive value: '))
-            proper_value = 0
-        except:
-            print('Give proper integer value...\n')
-            continue
+    uri = 'https://www.k-ruoka.fi/kilpailut/panda-vaajakoski-primus-arvonta'
 
     execution_report = []
     success_count = 0
@@ -242,7 +246,7 @@ def main():
         writer.writerow(['execution eneded at :'])
         writer.writerow([dt_execution_stop_time])
         writer.writerow('')
-        writer.writerow(['# of success executions :'])
+        writer.writerow(['# of successful executions :'])
         writer.writerow([str(success_count)])
         writer.writerow('')
         writer.writerow(['# of failed executions :'])
@@ -254,5 +258,83 @@ def main():
         writer.writerow(header)
         writer.writerows(execution_report)
 
-main()
+        f.close()
+    
+    return('execution-results/' + dt_report_time + '.csv')
+
+
+## GUI for program
+
+class Lottery(App):
+
+    def build(self):
+
+        self.window = GridLayout(
+                    padding=100,
+
+        )
+        self.window.cols = 1
+        self.window.size_hint = (0.5, 1)
+        self.window.pos_hint = {'center_x':0.5, 'center-y':0.5}
+
+        self.window.add_widget(Image(source='logo.jpg'))
+        
+        self.greeting = Label(
+                        text='Give # of times to participate in lottery',
+                        font_size = 35,
+                        color='white'
+        )
+
+        self.window.add_widget(self.greeting)
+
+        self.user = TextInput(
+                    multiline=False,
+                    padding_y = (20,20),
+                    size_hint = (1.0,0.2)
+        )
+
+        self.window.add_widget(self.user)
+
+        self.button = Button(
+                      text='Participate',
+                      size_hint = (1.0,0.2),
+                      bold = True,
+                      background_color = 'E16C2C',
+                      # otherwise will dim the color
+                      background_normal = '',
+        )
+
+        self.button.bind(on_press=self.callback_participate)
+        self.window.add_widget(self.button)
+
+        self.buttonEnd = Button(
+                      text='Exit program',
+                      size_hint = (1.0,0.2),
+                      bold = True,
+                      background_color = 'F41833',
+                      # otherwise will dim the color
+                      background_normal = ''
+        )
+
+        self.buttonEnd.bind(on_press=self.callback_exit)
+        self.window.add_widget(self.buttonEnd)
+
+        return self.window
+
+    def callback_participate(self, event):
+
+        try:
+            times_to_participate = int(self.user.text)
+            start_lottery(times_to_participate)
+            self.greeting.text = 'Execution ended! You can view execution report from \n     the same folder where this program is located.'
+
+        except:
+            self.greeting.text = 'Give # of times to participate in lottery \n     (please give proper integer value)'
+
+    def callback_exit(self, event):
+        App.stop(self)
+        #add widgets to window
+
+if __name__ == "__main__":
+    Lottery().run()
     
