@@ -1,5 +1,6 @@
 # Participate in lottery
 
+##
 # for UI
 
 from kivy.config import Config
@@ -13,6 +14,8 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.popup import Popup
 
+##
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from time import sleep
@@ -20,6 +23,7 @@ import json
 from datetime import datetime
 import csv
 
+# initialize bot and bot actions
 class trackerBot(): 
 
     # initializing chromewebdriver
