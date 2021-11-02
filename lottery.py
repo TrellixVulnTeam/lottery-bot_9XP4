@@ -175,12 +175,14 @@ def main():
     
     print('\nStarting Execution...\n')
 
+    start_time = datetime.now()
+    dt_execution_start_time = str(start_time.strftime("%d/%m/%Y %H:%M:%S"))
+
     # initialize bot as many times as user requested
     for round in range (1, (times_to_participate+1)):
         
         execution_object = []
         start_time = datetime.now()
-        dt_execution_start_time = str(start_time.strftime("%d/%m/%Y %H:%M:%S"))
 
         status = bot(uri)
             
@@ -222,6 +224,7 @@ def main():
     dt_report_time = str(report_time.strftime("%d-%m-%Y_%H:%M:%S"))
 
     with open('execution-results/' + dt_report_time + '.csv', 'w', encoding='UTF8', newline='') as f:
+        
         writer = csv.writer(f)
 
         writer.writerow('')
@@ -232,6 +235,7 @@ def main():
         writer.writerow('')
         writer.writerow(['# of participations in lottery :'])
         writer.writerow([run_round])
+        writer.writerow('')
         writer.writerow(['execution started at :'])
         writer.writerow([dt_execution_start_time])
         writer.writerow('')
