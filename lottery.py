@@ -290,23 +290,23 @@ class Lottery(App):
 
         self.window.add_widget(Image(source='logo.jpg'))
         
-        self.greeting = Label(
+        self.message = Label(
                         text='Give # of times to participate in lottery',
                         font_size = 35,
                         color='white'
         )
 
-        self.window.add_widget(self.greeting)
+        self.window.add_widget(self.message)
 
-        self.user = TextInput(
+        self.input = TextInput(
                     multiline=False,
                     padding_y = (20,20),
                     size_hint = (1.0,0.2)
         )
 
-        self.window.add_widget(self.user)
+        self.window.add_widget(self.input)
 
-        self.button = Button(
+        self.buttonParticipate = Button(
                       text='Participate',
                       size_hint = (1.0,0.2),
                       bold = True,
@@ -315,8 +315,8 @@ class Lottery(App):
                       background_normal = '',
         )
 
-        self.button.bind(on_press=self.callback_participate)
-        self.window.add_widget(self.button)
+        self.buttonParticipate.bind(on_press=self.callback_participate)
+        self.window.add_widget(self.buttonParticipate)
 
         self.buttonEnd = Button(
                       text='Exit program',
@@ -335,12 +335,12 @@ class Lottery(App):
     def callback_participate(self, event):
 
         try:
-            times_to_participate = int(self.user.text)
+            times_to_participate = int(self.input.text)
             start_lottery(times_to_participate)
-            self.greeting.text = 'Execution ended! You can view execution report from \n     the same folder where this program is located.'
+            self.message.text = 'Execution ended! You can view execution report from \n     the same folder where this program is located.'
 
         except:
-            self.greeting.text = 'Give # of times to participate in lottery \n     (please give proper integer value)'
+            self.message.text = 'Give # of times to participate in lottery \n     (please give proper integer value)'
 
     def callback_exit(self, event):
         App.stop(self)
