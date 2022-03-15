@@ -55,8 +55,14 @@ In case of any exception program quits execution and acts per excecution log pro
 
 ## Program up and running
 - Activate virtual environment 
+````
 C:\sfloads\salesforce-app\venv\Scripts\activate
+````
 - Start program and provide command line argument
--- python C:\sfloads\salesforce-app\src\sfdumbs\main.py daily
+````
+python C:\sfloads\salesforce-app\src\sfdumbs\main.py daily
+````
 or
--- python C:\sfloads\salesforce-app\src\sfdumbs\main.py hourly
+````
+python C:\sfloads\salesforce-app\src\sfdumbs\main.py hourly
+````
