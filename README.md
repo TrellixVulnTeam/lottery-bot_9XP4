@@ -38,17 +38,17 @@ Technologies:
 - Delete over 7 old records from STG table
 
 #### Execution log
-Program finishes succesfully:
-- Creates execution log under /salesforce-app/excecution_log/
-Program finishes with failure:
-- Error message logged under /salesforce-app/excecution_log/
+- Program finishes succesfully:
+Creates execution log under /salesforce-app/excecution_log/
+- Program finishes with failure:
+Error message logged under /salesforce-app/excecution_log/
 
 #### Run program as daily or hourly excecution 
 With command line arguments daily or hourly execution log can be defined. See more in section 'Program up and running'
-Daily excecution:
-- Load all salesforce objects and insert into SQL Server
-Hourly excecution:
-- Load objects specified in .env file from salesforce and insert into SQL Server
+- Daily excecution:
+Load all salesforce objects and insert into SQL Server.
+- Hourly excecution:
+Load objects specified in .env file from salesforce and insert into SQL Server.
 
 #### Error handling
 In case of any exception program quits execution and acts per excecution log program finishes with failure
