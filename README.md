@@ -54,11 +54,11 @@ Load objects specified in .env file from salesforce and insert into SQL Server.
 In case of any exception program quits execution and acts per excecution log program finishes with failure
 
 ## Program up and running
-- Activate virtual environment 
+#### Activate virtual environment 
 ````
 C:\sfloads\salesforce-app\venv\Scripts\activate
 ````
-- Start program and provide command line argument
+#### Start program and provide command line argument
 ````
 python C:\sfloads\salesforce-app\src\sfdumbs\main.py daily
 ````
